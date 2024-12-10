@@ -1,0 +1,16 @@
+[
+    {
+        "review_id":1,
+        "album_id":178,
+        "review_date":"4\/12\/2024",
+        "review_text":"Lively and catchy tunes, combining instruments of classic rockabilly and rock and roll with more modern 80's rock. My favorite songs were Rattled and Not Alone Any More, as well as Heading for the Light where Jeff Lynne's influence is very apparent.",
+        "rating":4
+    },
+    {
+        "review_id":2,
+        "album_id":179,
+        "review_date":"6\/12\/2024",
+        "review_text":"A very unique shade of progressive rock. I like how it explores frustrations of British society, from indoctrination (in 'School), solitude ('Rudy'), how mental illness is treated ('Asylum') but with a slightly positive message with 'Hide in Your Shell' and 'Bloody Well Right'. My favorite song has to be Rudy, it reminds me of ELO's Horace Wimp with a more doomed and depressive tone; the orchestration is brilliant.",
+        "rating":5
+    }
+]
