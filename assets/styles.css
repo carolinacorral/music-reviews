@@ -1,12 +1,37 @@
 body {
     font-family: Arial, sans-serif;
-    margin: 20px;
-    line-height: 1.6;
+    margin: 0;
+    padding: 0;
 }
-h1 {
+
+header {
+    background-color: #333;
+    color: white;
+    padding: 10px;
+    text-align: center;
+}
+
+main {
+    padding: 20px;
+}
+
+.entry, .review {
+    border-bottom: 1px solid #ccc;
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+}
+
+.entry img, .review img {
+    max-width: 150px;
+    display: block;
+}
+
+h2 {
+    margin: 0;
     color: #333;
 }
-div {
-    margin-top: 20px;
+
+p {
+    margin: 5px 0;
 }
 
