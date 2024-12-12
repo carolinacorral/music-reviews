@@ -1,18 +1,33 @@
+<!-- reviews.html -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Album Reviews</title>
+    <title>music archive</title>
     <link rel="stylesheet" href="assets/styles.css">
 </head>
 <body>
     <header>
-        <h1>Album Reviews</h1>
+        <h1>music archive</h1>
     </header>
-    <main id="reviews-container">
-        <!-- Reviews will be displayed here -->
+    <nav>
+        <ul>
+            <li><a href="index.html">home</a></li>
+            <li><a href="reviews.html">reviews</a></li>
+            <li><a href="full-data.html">all records</a></li>
+        </ul>
+    </nav>
+    <main>
+        <h2>my reviews</h2>
+        <section class="reviews-container">
+            <!-- Reviews will be dynamically inserted here -->
+        </section>
     </main>
-    <script src="assets/app.js"></script>
+    <footer>
+        <p>&copy; music archive </p>
+    </footer>
+
+    <script src="assets/app-reviews.js"></script>
 </body>
 </html>
