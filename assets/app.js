@@ -1,52 +1,70 @@
-document.addEventListener('DOMContentLoaded', () => {
-    Promise.all([
-        fetch('data/database.json').then(response => response.json()),
-        fetch('data/reviews.json').then(response => response.json())
-    ])
-    .then(([database, reviews]) => {
-        const reviewsContainer = document.getElementById('reviews-container');
-        reviews.forEach(review => {
-            const albumInfo = database.find(entry => entry.album_id === review.album_id);
-            if (albumInfo) {
-                const reviewElement = document.createElement('div');
-                reviewElement.classList.add('review');
-                reviewElement.innerHTML = `
-                    <h2>${albumInfo.album} by ${albumInfo.artist}</h2>
-                    <img src="${albumInfo.image_url}" alt="${albumInfo.album}">
-                    <p>Year: ${albumInfo.year}</p>
-                    <p>Genre: ${albumInfo.genre}</p>
-                    <p>Rating: ${review.rating}</p>
-                    <p>${review.review_text}</p>
-                    <p>Date: ${new Date(review.review_date).toLocaleDateString()}</p>
-                `;
-                reviewsContainer.appendChild(reviewElement);
-            }
-        });
-    })
-    .catch(error => console.error('Error fetching data:', error));
-});
+// Fetch data from the API and populate the home page
+async function fetchData() {
+    const apiUrl = 'https://9nncwnbbqk.execute-api.us-east-2.amazonaws.com/dev/getSheetData';
 
-document.addEventListener('DOMContentLoaded', () => {
-    fetch('data/database.json')
-        .then(response => response.json())
-        .then(data => {
-            const entriesContainer = document.getElementById('latest-entries');
-            // Sort by log_date in descending order and slice the last 5 entries
-            const latestEntries = data.sort((a, b) => new Date(b.log_date) - new Date(a.log_date)).slice(-5);
-            
-            latestEntries.forEach(entry => {
-                const entryElement = document.createElement('div');
-                entryElement.classList.add('entry');
-                entryElement.innerHTML = `
-                    <h2>${entry.album}</h2>
-                    <p>Artist: ${entry.artist}</p>
-                    <p>Year: ${entry.year}</p>
-                    <p>Genre: ${entry.genre}</p>
-                    <p>Log Date: ${new Date(entry.log_date).toLocaleDateString()}</p>
-                `;
-                entriesContainer.appendChild(entryElement);
-            });
-        })
-        .catch(error => console.error('Error fetching database.json:', error));
-});
+    try {
+        const response = await fetch(apiUrl);
+        const data = await response.json();
 
+        const rows = data.database; // Access the database tab
+        populateLatestEntries(rows);
+        populateFavorites(rows);
+    } catch (error) {
+        console.error('Error fetching data:', error);
+    }
+}
+
+
+
+function populateLatestEntries(rows) {
+    const sortedRows = rows
+    .filter(row => row[7]) // Date row
+    .sort((a, b) => new Date(b[7]) - new Date(a[7])); // Compare dates in descending order
+
+    const latestEntries = sortedRows.slice(0, 4); // Get the top 4 entries
+    const container = document.querySelector('.entries-container');
+
+    latestEntries.forEach(row => {
+        const entry = createEntry(row);
+        container.appendChild(entry);
+    });
+}
+
+function populateFavorites(rows) {
+    const favoriteRows = rows.filter(row => row[8] === '1'); // Filter by favorite = 1
+    const container = document.querySelector('.favorites-container');
+
+    favoriteRows.forEach(row => {
+        const favorite = createEntry(row);
+        container.appendChild(favorite);
+    });
+}
+
+function createEntry(row) {
+    const entryDiv = document.createElement('div');
+    entryDiv.classList.add('entry');
+
+    const image = document.createElement('img');
+    image.src = row[9]; // image_url
+    image.alt = row[1]; // album name
+
+    const infoDiv = document.createElement('div');
+    infoDiv.classList.add('album-info');
+
+    const title = document.createElement('span');
+    title.textContent = `${row[1]} (${row[3]})`; // album name (year)
+
+    const artistOrigin = document.createElement('span');
+    artistOrigin.textContent = `${row[2]} (${row[5]})`; // album artist (origin)
+
+    infoDiv.appendChild(title);
+    infoDiv.appendChild(artistOrigin);
+
+    entryDiv.appendChild(image);
+    entryDiv.appendChild(infoDiv);
+
+    return entryDiv;
+}
+
+// Initialize the page
+fetchData();
