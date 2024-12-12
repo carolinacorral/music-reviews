@@ -3,17 +3,40 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Music Reviews Homepage</title>
+    <title>music archive</title>
     <link rel="stylesheet" href="assets/styles.css">
 </head>
 <body>
     <header>
-        <h1>Latest Entries</h1>
+        <h1>music archive</h1>
     </header>
-    <main id="latest-entries">
-        <!-- Latest entries will be displayed here -->
+    <nav>
+        <ul>
+            <li><a href="index.html">home</a></li>
+            <li><a href="reviews.html">reviews</a></li>
+            <li><a href="full-data.html">all records</a></li>
+        </ul>
+    </nav>
+    <main>
+        <section id="home">
+            <h2>home</h2>
+            <div id="latest-entries">
+                <h3>latest entries</h3>
+                <div class="entries-container">
+                    <!-- Latest entries will be inserted here -->
+                </div>
+            </div>
+            <div id="favorites">
+                <h3>all-time favorites</h3>
+                <div class="favorites-container">
+                    <!-- Favorite entries will be inserted here -->
+                </div>
+            </div>
+        </section>
     </main>
+    <footer>
+        <p>&copy; 2024 Music Reviews</p>
+    </footer>
     <script src="assets/app.js"></script>
 </body>
 </html>
-
