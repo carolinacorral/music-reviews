@@ -76,6 +76,19 @@ section {
     align-items: center; 
 }
 
+@media (max-width: 768px) {
+    .entry, .favorite {
+        flex: 1 1 100%; /* Make each entry take full width */
+        max-width: 100%;
+        flex-direction: column; /* Stack content vertically */
+        align-items: center; /* Center align items */
+    }
+
+    .entry img, .favorite img {
+        margin-bottom: 10px; /* Add spacing below the image */
+    }
+}
+
 .entry img, .favorite img {
     width: 120px; 
     height: 120px;
